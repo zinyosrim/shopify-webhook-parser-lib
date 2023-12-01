@@ -29,7 +29,7 @@ pip install shopifywebhookparser
 ```
 
 ## Usage
-To use this module in an Azure Function, import and call the parse_shopify_webhook_request function with the appropriate parsing strategy.
+This module can be used in Azure Functions to parse Shopify webhook requests. The `ParsedWebhook` class is designed to be flexible, allowing direct instantiation with specific attributes or deriving them from provided webhook data.
 
 ### Example
 ```python
@@ -38,14 +38,15 @@ from shopifywebhookparser import parse_shopify_webhook_request, azure_func_reque
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     try:
-        onlinestore_name, data_bytes, headers, hmac_sha256 = parse_shopify_webhook_request(
+        parsed_webhook = parse_shopify_webhook_request(
             req, azure_func_request_parse_strategy
         )
+        # Access parsed data
+        onlinestore_name = parsed_webhook.onlinestore_name
         # Further processing of the parsed data
         return func.HttpResponse(f"Processed webhook for store: {onlinestore_name}", status_code=200)
     except ValueError as e:
         return func.HttpResponse(f"Error: {e}", status_code=400)
-
 ```
 ## Development and Contributions
 Feel free to contribute to the improvement of this module by submitting pull requests or reporting issues.

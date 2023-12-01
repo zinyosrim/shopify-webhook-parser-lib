@@ -1,12 +1,23 @@
-# parsing.pyi
-from typing import Any, Callable, Tuple
-from azure.functions import HttpRequest
-from .models import ParsedWebhook
+# models.pyi
+from typing import Any, Dict, Optional
+from dataclasses import dataclass
 
-ParseFn = Callable[[HttpRequest], Tuple[bytes, dict[str, Any]]]
+@dataclass
+class ParsedWebhook:
+    """
+    Represents a parsed Shopify webhook request.
 
-def create_parsed_webhook(req: HttpRequest, strategy: ParseFn) -> ParsedWebhook: ...
-def parse_verification_params(
-    req: Any, strategy: ParseFn
-) -> Tuple[bytes, str, str]: ...
-def azure_strategy(req: HttpRequest) -> Tuple[bytes, dict[str, Any]]: ...
+    Attributes:
+        payload (Dict[str, Any]): The main content of the webhook, typically parsed from JSON.
+        attributes (Dict[str, str]): The headers from the webhook request.
+        source_url (Optional[str]): The source URL of the webhook, extracted from the headers if not provided.
+        onlinestore_name (Optional[str]): The name of the online store, derived from the source URL if not provided.
+        topic (Optional[str]): The topic of the webhook, extracted from the headers if not provided.
+    """
+    payload: Dict[str, Any]
+    attributes: Dict[str, str]
+    source_url: Optional[str] = None
+    onlinestore_name: Optional[str] = None
+    topic: Optional[str] = None
+
+    def __post_init__(self) -> None: ...

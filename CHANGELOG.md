@@ -1,3 +1,5 @@
+## v0.1.23
+adapt dataclass for mor flexibility with instantiation
 ## v0.1.10
 fix stub files
 ## v0.1.9

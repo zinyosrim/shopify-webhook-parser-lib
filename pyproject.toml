@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "shopifywebhookparser"
-version = "0.1.22"
+version = "0.1.23"
 description = "A Python module to parse Shopify webhook requests, tailored for Azure Functions."
 authors = ["Zin Yosrim <zinyosrim@gmail.com>"]
 license = "MIT"
