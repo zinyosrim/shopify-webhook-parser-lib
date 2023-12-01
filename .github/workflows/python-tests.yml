@@ -11,12 +11,11 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.11'  # Replace with the version you need
-
+        python-version: '3.11'  
     - name: Install dependencies
       run: |
         python3.11 -m pip install --upgrade pip
-        # Add any other dependencies here
-
+        pip install poetry
+        poetry install
     - name: Run unittests
-      run: python -m unittest discover
+      run: poetry run python -m unittest discover
