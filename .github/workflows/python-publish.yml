@@ -38,7 +38,9 @@ jobs:
       run: python -m build
 
     - name: Publish package
-      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_TOKEN_SHOPIFYWEBHOOKPARSER }}
+      env:
+        PYPI_TOKEN: ${{ secrets.PYPI_TOKEN_SHOPIFYWEBHOOKPARSER }}
+      run: |
+        poetry config pypi-token.pypi $PYPI_TOKEN
+        poetry publish --build
+
