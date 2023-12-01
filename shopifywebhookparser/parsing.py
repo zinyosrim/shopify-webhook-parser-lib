@@ -41,17 +41,20 @@ def create_parsed_webhook(req: HttpRequest, strategy: ParseFn) -> ParsedWebhook:
 
 def parse_verification_params(req: Any, strategy: ParseFn) -> Tuple[bytes, str, str]:
     """
-    Parses the incoming Shopify webhook request using the provided strategy to extract verification parameters.
+    Parses the incoming Shopify webhook request using the provided strategy to
+    extract verification parameters.
 
     Args:
         req (Any): The request object to parse.
         strategy (ParseFn): A callable that implements the parsing logic.
 
     Returns:
-        Tuple[bytes, str, str]: A tuple containing the request body in bytes, HMAC SHA256 string, and online store name.
+        Tuple[bytes, str, str]: A tuple containing the request body in bytes,
+        HMAC SHA256 string, and online store name.
 
     Raises:
-        ValueError: If required headers are missing or if the request cannot be parsed.
+        ValueError: If required headers are missing or if the request cannot be
+        parsed.
     """
     try:
         data_bytes, headers = strategy(req)
